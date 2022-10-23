@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.example.hackathonautumn2022'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId rootProject.applicationId
+        minSdk rootProject.minSdk
+        targetSdk rootProject.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://acba-83-234-174-21.eu.ngrok.io/api/\"")
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", "\"url\"")
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+// Modules
+
+dependencies {
+    implementation project(":core")
+    // Dagger 2
+    implementation "com.google.dagger:dagger:${rootProject.dagger_version}"
+    kapt "com.google.dagger:dagger-compiler:${rootProject.dagger_version}"
+
+    // Network
+    implementation "com.squareup.okhttp3:okhttp:${rootProject.okhttp_version}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.okhttp_version}"
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofit_version}"
+    implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofit_version}"
+    implementation "com.squareup.retrofit2:adapter-rxjava3:${rootProject.retrofit_version}"
+
+    // Coil
+    implementation "io.coil-kt:coil:${rootProject.coil_version}"
+    implementation "io.coil-kt:coil-gif:${rootProject.coil_version}"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:${rootProject.nav_version}"
+    implementation "androidx.navigation:navigation-ui-ktx:${rootProject.nav_version}"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:${rootProject.nav_version}" \
+
+    // Material You
+    implementation "com.google.android.material:material:${rootProject.material_design_version}"
+
+    implementation "androidx.core:core-ktx:${rootProject.core_ktx_version}"
+    implementation "androidx.appcompat:appcompat:${rootProject.app_compat_version}"
+    implementation "com.google.android.material:material:${rootProject.material_version}"
+    implementation "androidx.constraintlayout:constraintlayout:${rootProject.constraint_layout_version}"
+    testImplementation "junit:junit:${rootProject.junit_version}"
+    androidTestImplementation "androidx.test.ext:junit:${rootProject.androidx_test_ext_junit_version}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${rootProject.espresso_core_version}"
+}

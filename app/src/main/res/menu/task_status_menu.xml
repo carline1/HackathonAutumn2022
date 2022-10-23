@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/notStarted"
+        android:title="@string/not_started">
+    </item>
+    <item
+        android:id="@+id/inProgress"
+        android:title="@string/in_progress">
+    </item>
+    <item
+        android:id="@+id/failed"
+        android:title="@string/failed">
+    </item>
+    <item
+        android:id="@+id/finished"
+        android:title="@string/finished">
+    </item>
+
+</menu>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/authFragment">
+
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.example.hackathonautumn2022.features.auth.AuthFragment"
+        android:label="auth_fragment"
+        tools:layout="@layout/auth_fragment" >
+        <action
+            android:id="@+id/action_authFragment_to_regFragment"
+            app:destination="@id/regFragment" />
+        <action
+            android:id="@+id/action_authFragment_to_mainScreenFragment"
+            app:destination="@id/mainScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/regFragment"
+        android:name="com.example.hackathonautumn2022.features.reg.RegFragment"
+        android:label="reg_fragment"
+        tools:layout="@layout/reg_fragment" />
+    <fragment
+        android:id="@+id/mainScreenFragment"
+        android:name="com.example.hackathonautumn2022.features.main.MainScreenFragment"
+        android:label="main_screen_fragment"
+        tools:layout="@layout/main_screen_fragment" >
+        <action
+            android:id="@+id/action_mainScreenFragment_to_taskFragment"
+            app:destination="@id/taskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.hackathonautumn2022.features.settings.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/settings_fragment" />
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="com.example.hackathonautumn2022.features.task.TaskFragment"
+        android:label="task_fragment"
+        tools:layout="@layout/task_fragment" >
+        <action
+            android:id="@+id/action_taskFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+        <action
+            android:id="@+id/action_taskFragment_to_marksFragment"
+            app:destination="@id/marksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/commentsFragment"
+        android:name="com.example.hackathonautumn2022.features.comments.CommentsFragment"
+        android:label="comments_fragment"
+        tools:layout="@layout/comments_fragment" />
+    <fragment
+        android:id="@+id/marksFragment"
+        android:name="com.example.hackathonautumn2022.features.marks.MarksFragment"
+        android:label="marks_fragment"
+        tools:layout="@layout/marks_fragment" />
+</navigation>
