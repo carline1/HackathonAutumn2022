@@ -16,4 +16,7 @@
     <string name="in_progress">В работе</string>
     <string name="failed">Провалена</string>
     <string name="finished">Завершена</string>
+    <string name="error">Ошибка</string>
+    <string name="login_or_pwd_fail">Введен неверный логин или пароль</string>
+    <string name="Ok">Ок</string>
 </resources>

@@ -3,6 +3,7 @@ package com.example.hackathonautumn2022.features.comments
 import androidx.lifecycle.viewModelScope
 import com.example.core.ui.BaseState
 import com.example.core.ui.BaseViewModel
+import com.example.hackathonautumn2022.consts.Constants
 import com.example.hackathonautumn2022.data.models.MessasgesResponse
 import com.example.hackathonautumn2022.domain.interactors.MainInteractor
 import com.example.hackathonautumn2022.features.comments.usecases.PrepareMessagesScreenData
@@ -44,11 +45,15 @@ class CommentsViewModel @AssistedInject constructor(
     fun sendMessage(message: String) {
         viewModelScope.launch {
             try {
-                interactor.lastCommentsData.add(MessasgesResponse(null, user, task, message))
-                val newScreenData = PrepareMessagesScreenData(
-                    user,
-                    interactor.lastCommentsData
-                ).prepare()
+                interactor.lastCommentsData.add(
+                    MessasgesResponse(
+                        null,
+                        Constants.userName,
+                        task,
+                        message
+                    )
+                )
+                val newScreenData = PrepareMessagesScreenData(interactor.lastCommentsData).prepare()
                 updateState { this.screenData = newScreenData }
                 onAction(Actions.ScrollListToBottom)
                 interactor.sendMessageToComments(userId, taskId, user, task, message)

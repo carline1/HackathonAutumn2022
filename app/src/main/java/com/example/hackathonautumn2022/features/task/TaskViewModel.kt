@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.viewModelScope
 import com.example.core.ui.BaseState
 import com.example.core.ui.BaseViewModel
-import com.example.hackathonautumn2022.data.models.UpdateTaskStatusRequest
+import com.example.hackathonautumn2022.consts.Constants
 import com.example.hackathonautumn2022.domain.interactors.MainInteractor
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -14,8 +14,8 @@ import kotlinx.coroutines.launch
 class TaskViewModel @AssistedInject constructor(
     @Assisted("userId") private val userId: Int,
     @Assisted("taskId") private val taskId: Int,
-    @Assisted("userId") private val user: String,
-    @Assisted("taskId") private val task: String,
+    @Assisted("user") private val user: String,
+    @Assisted("task") private val task: String,
     private val interactor: MainInteractor,
 ) : BaseViewModel<TaskViewModel.State, TaskViewModel.Actions>(State()) {
 
@@ -54,6 +54,8 @@ class TaskViewModel @AssistedInject constructor(
         }
     }
 
+    fun checkMarksButton() = Constants.userName == user
+
     data class State(
         var isLoading: Boolean = false,
         var description: String = "",
@@ -76,8 +78,8 @@ class TaskViewModel @AssistedInject constructor(
         fun create(
             @Assisted("userId") userId: Int,
             @Assisted("taskId") taskId: Int,
-            @Assisted("userId") user: String,
-            @Assisted("taskId") task: String,
+            @Assisted("user") user: String,
+            @Assisted("task") task: String,
         ): TaskViewModel
     }
 

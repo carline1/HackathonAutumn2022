@@ -13,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.example.hackathonautumn2022.MainActivity
 import com.example.hackathonautumn2022.R
+import com.example.hackathonautumn2022.consts.Constants
 import com.example.hackathonautumn2022.data.models.TaskResponse
 import com.example.hackathonautumn2022.databinding.MainScreenFragmentBinding
 import com.example.hackathonautumn2022.di.AppComponent
 import com.example.hackathonautumn2022.di.appComponent
+import com.example.hackathonautumn2022.features.marks.MarksFragment
 import com.example.hackathonautumn2022.features.reg.RegViewModel
 import com.example.hackathonautumn2022.features.task.TaskFragment
 import com.example.hackathonautumn2022.utils.collectOnStart
@@ -161,7 +163,7 @@ class MainScreenFragment : Fragment() {
 
     private fun observeActions() {
         viewModel.action.onEach {
-            when(it) {
+            when (it) {
                 is MainScreenViewModel.Actions.OnTaskClicked -> {
                     val bundle = TaskFragment.prepareBundle(it.userId, it.taskId, it.user, it.task)
                     navigateTo(R.id.action_mainScreenFragment_to_taskFragment, bundle)

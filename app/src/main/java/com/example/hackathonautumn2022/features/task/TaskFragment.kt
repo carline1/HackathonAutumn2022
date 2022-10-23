@@ -72,8 +72,13 @@ class TaskFragment : Fragment() {
     }
 
     private fun initMarksButton() {
-        binding.marksButton.setOnClickListener {
-            viewModel.onMarksButtonClicked()
+        if (viewModel.checkMarksButton()) {
+            binding.marksButton.isVisible = true
+            binding.marksButton.setOnClickListener {
+                viewModel.onMarksButtonClicked()
+            }
+        } else {
+            binding.marksButton.isVisible = false
         }
     }
 
@@ -135,7 +140,8 @@ class TaskFragment : Fragment() {
     }
 
     private fun updateCreatorName(creatorName: String) {
-        binding.creatorNameText.text = creatorName
+//        binding.creatorNameText.text = creatorName
+        binding.creatorNameText.text = "root"
     }
 
     private fun updateDateOfCreation(dateOfCreation: String) {

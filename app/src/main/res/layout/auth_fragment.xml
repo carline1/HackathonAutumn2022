@@ -38,18 +38,23 @@
             android:id="@+id/authButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
             android:text="@string/sign_in" />
 
-        <TextView
-            android:id="@+id/regButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="?attr/colorOnPrimary"
-            android:text="@string/sign_up"
-            android:textAlignment="center"
-            android:textSize="14sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/regButton"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:textColor="?attr/colorOnPrimary"-->
+<!--            android:text="@string/sign_up"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textSize="14sp" />-->
 
     </LinearLayout>
+
+    <include
+        android:id="@+id/progress"
+        layout="@layout/progress_layout"
+        android:visibility="gone" />
 
 </FrameLayout>

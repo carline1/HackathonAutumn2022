@@ -1,5 +1,6 @@
 package com.example.hackathonautumn2022.di
 
+import com.example.hackathonautumn2022.features.auth.AuthViewModel
 import com.example.hackathonautumn2022.features.comments.CommentsViewModel
 import com.example.hackathonautumn2022.features.main.MainScreenViewModel
 import com.example.hackathonautumn2022.features.marks.MarksViewModel
@@ -15,5 +16,6 @@ interface AppComponent {
     val taskViewModel: TaskViewModel.Factory
     val commentsViewModel: CommentsViewModel.Factory
     val marksViewModel: MarksViewModel.Factory
+    val authViewModel: AuthViewModel
 
 }

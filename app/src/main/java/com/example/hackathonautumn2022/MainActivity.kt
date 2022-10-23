@@ -1,22 +1,27 @@
 package com.example.hackathonautumn2022
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
+import androidx.annotation.StyleRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.hackathonautumn2022.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
+    @StyleRes
+    private var currentTheme = R.style.AppTheme1
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(currentTheme)
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
@@ -32,6 +37,11 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationView.isVisible =
                 destination.id == R.id.mainScreenFragment || destination.id == R.id.settingsFragment
         }
+    }
+
+    fun changeTheme(styleId: Int) {
+        currentTheme = styleId
+        recreate()
     }
 
 }

@@ -83,14 +83,15 @@ class CommentsFragment : Fragment() {
                     parent: RecyclerView,
                     s: RecyclerView.State
                 ) {
-                    parent.adapter?.let {
+                    parent.adapter?.let { adapter ->
                         val childAdapterPosition = parent.getChildAdapterPosition(view)
                             .let { if (it == RecyclerView.NO_POSITION) return else it }
+//                        val viewType = adapter.getItemViewType(childAdapterPosition)
 
                         rect.right = 20.dp
                         rect.left = 20.dp
                         rect.top = if (childAdapterPosition == 0) 16.dp else 0
-                        rect.bottom = if (childAdapterPosition != 0) 16.dp else 0
+                        rect.bottom = 16.dp
                     }
                 }
             })

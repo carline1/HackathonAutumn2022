@@ -4,6 +4,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.ui.BaseState
 import com.example.core.ui.BaseViewModel
 import com.example.hackathonautumn2022.domain.interactors.MainInteractor
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

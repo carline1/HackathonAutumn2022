@@ -20,7 +20,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"https://acba-83-234-174-21.eu.ngrok.io/api/\"")
+            buildConfigField("String", "BASE_URL", "\"https://acba-83-234-174-21.eu.ngrok.io/\"")
         }
         release {
             minifyEnabled false

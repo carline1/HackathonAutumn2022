@@ -1,10 +1,10 @@
 package com.example.hackathonautumn2022.features.comments.usecases
 
+import com.example.hackathonautumn2022.consts.Constants.userName
 import com.example.hackathonautumn2022.data.models.MessasgesResponse
 import com.example.hackathonautumn2022.features.common.ChatAdapter.ChatViewHolderModel
 
 class PrepareMessagesScreenData(
-    private val userName: String,
     private val comments: List<MessasgesResponse>
 ) {
 

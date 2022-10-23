@@ -17,8 +17,8 @@ import kotlinx.coroutines.launch
 class MarksViewModel @AssistedInject constructor(
     @Assisted("userId") private val userId: Int,
     @Assisted("taskId") private val taskId: Int,
-    @Assisted("userId") private val user: String,
-    @Assisted("taskId") private val task: String,
+    @Assisted("user") private val user: String,
+    @Assisted("task") private val task: String,
     private val interactor: MainInteractor
 ) : BaseViewModel<MarksViewModel.State, MarksViewModel.Actions>(State()) {
 
@@ -43,13 +43,10 @@ class MarksViewModel @AssistedInject constructor(
         viewModelScope.launch {
             try {
                 interactor.lastMarksData.add(MessasgesResponse(null, user, task, message))
-                val newScreenData = PrepareMessagesScreenData(
-                    user,
-                    interactor.lastMarksData
-                ).prepare()
+                val newScreenData = PrepareMessagesScreenData(interactor.lastMarksData).prepare()
                 updateState { this.screenData = newScreenData }
                 onAction(Actions.ScrollListToBottom)
-                interactor.sendMessageToComments(userId, taskId, user, task, message)
+                interactor.sendMessageToMarks(userId, taskId, user, task, message)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -72,8 +69,8 @@ class MarksViewModel @AssistedInject constructor(
         fun create(
             @Assisted("userId") userId: Int,
             @Assisted("taskId") taskId: Int,
-            @Assisted("userId") user: String,
-            @Assisted("taskId") task: String,
+            @Assisted("user") user: String,
+            @Assisted("task") task: String,
         ): MarksViewModel
     }
 

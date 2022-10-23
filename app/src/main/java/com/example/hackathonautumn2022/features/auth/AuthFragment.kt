@@ -4,14 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.hackathonautumn2022.MainActivity
 import com.example.hackathonautumn2022.R
+import com.example.hackathonautumn2022.consts.Constants
 import com.example.hackathonautumn2022.databinding.AuthFragmentBinding
+import com.example.hackathonautumn2022.di.AppComponent
+import com.example.hackathonautumn2022.di.appComponent
+import com.example.hackathonautumn2022.features.main.MainScreenFragment
 import com.example.hackathonautumn2022.utils.collectOnStart
 import com.example.hackathonautumn2022.utils.navigateTo
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.onEach
 
 class AuthFragment : Fragment() {
@@ -19,7 +22,12 @@ class AuthFragment : Fragment() {
     private var _binding: AuthFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: AuthViewModel by viewModels()
+    private val component: AppComponent by lazy {
+        requireContext().appComponent
+    }
+    private val viewModel: AuthViewModel by lazy {
+        component.authViewModel
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,21 +36,24 @@ class AuthFragment : Fragment() {
     ): View {
         _binding = AuthFragmentBinding.inflate(inflater, container, false)
 
-        initRegButton()
+//        initRegButton()
         initAuthButton()
 
         return binding.root
     }
 
-    private fun initRegButton() {
-        binding.regButton.setOnClickListener {
-            navigateTo(R.id.action_authFragment_to_regFragment)
-        }
-    }
+//    private fun initRegButton() {
+//        binding.regButton.setOnClickListener {
+//            navigateTo(R.id.action_authFragment_to_regFragment)
+//        }
+//    }
 
     private fun initAuthButton() {
         binding.authButton.setOnClickListener {
-            viewModel.onAuthButtonClicked("", "")
+            viewModel.onAuthButtonClicked(
+                login = binding.loginEditText.text.toString(),
+                pwd = binding.pwdEditText.text.toString()
+            )
         }
     }
 
@@ -55,22 +66,29 @@ class AuthFragment : Fragment() {
 
     private fun observeState() {
         viewModel.state.onEach {
-
+            updateProgress(it.isLoading)
         }.collectOnStart(viewLifecycleOwner)
+    }
+
+    private fun updateProgress(isLoading: Boolean) {
+        binding.progress.root.isVisible = isLoading
     }
 
     private fun observeActions() {
         viewModel.action.onEach {
             when (it) {
-                is AuthViewModel.Actions.OnAuthButtonClicked -> onAuthButtonClicked(
-                    it.login,
-                    it.pwd
-                )
+                is AuthViewModel.Actions.ToNextScreen -> onAuthButtonClicked(it.login)
+                AuthViewModel.Actions.OnLoginError -> MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.error)
+                    .setMessage(R.string.login_or_pwd_fail)
+                    .setPositiveButton(R.string.Ok) { dialog, which -> }
+                    .show()
             }
         }.collectOnStart(viewLifecycleOwner)
     }
 
-    private fun onAuthButtonClicked(login: String, pwd: String) {
+    private fun onAuthButtonClicked(login: String) {
+        Constants.userName = login
         navigateTo(R.id.action_authFragment_to_mainScreenFragment)
     }
 

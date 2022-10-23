@@ -88,7 +88,7 @@ class MarksFragment : Fragment() {
                         rect.right = 20.dp
                         rect.left = 20.dp
                         rect.top = if (childAdapterPosition == 0) 16.dp else 0
-                        rect.bottom = if (childAdapterPosition != 0) 16.dp else 0
+                        rect.bottom = 16.dp
                     }
                 }
             })

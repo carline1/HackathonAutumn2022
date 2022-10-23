@@ -1,6 +1,8 @@
 package com.example.hackathonautumn2022.domain.interactors
 
+import com.example.hackathonautumn2022.consts.Constants
 import com.example.hackathonautumn2022.data.api.AppService
+import com.example.hackathonautumn2022.data.models.LoginRequest
 import com.example.hackathonautumn2022.data.models.MessasgesResponse
 import com.example.hackathonautumn2022.data.models.MessageRequest
 import com.example.hackathonautumn2022.data.models.UpdateTaskStatusRequest
@@ -41,10 +43,9 @@ class MainInteractor @Inject constructor(
     }
 
     suspend fun getCommentsOfTask(userId: Int, taskId: Int): List<ChatAdapter.ChatViewHolderModel> {
-        val userName = service.getUserById(userId).user?.username ?: ""
         val comments = service.getCommentsOfTask(userId, taskId)
         lastCommentsData = comments as MutableList<MessasgesResponse>
-        return PrepareMessagesScreenData(userName, comments).prepare()
+        return PrepareMessagesScreenData(comments).prepare()
     }
 
     suspend fun sendMessageToComments(
@@ -58,10 +59,9 @@ class MainInteractor @Inject constructor(
     }
 
     suspend fun getMarksOfTask(userId: Int, taskId: Int): List<ChatAdapter.ChatViewHolderModel> {
-        val userName = service.getUserById(userId).user?.username ?: ""
         val marks = service.getMarksOfTask(userId, taskId)
         lastMarksData = marks as MutableList<MessasgesResponse>
-        return PrepareMessagesScreenData(userName, marks).prepare()
+        return PrepareMessagesScreenData(marks).prepare()
     }
 
     suspend fun sendMessageToMarks(
@@ -72,6 +72,10 @@ class MainInteractor @Inject constructor(
         description: String
     ) {
         service.sendMessageToMarks(userId, taskId, MessageRequest(user, task, description))
+    }
+
+    suspend fun login(login: String, pwd: String) {
+        service.login(LoginRequest(login, pwd))
     }
 
 }
